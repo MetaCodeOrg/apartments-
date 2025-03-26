@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/account_type.dart';
+import 'package:flutter_app/screens/auth/pages/account_type.dart';
 import 'package:flutter_app/screens/home/main_screen.dart';
 import 'package:flutter_app/screens/home/navigate_bar_screens/about.dart';
 import 'package:flutter_app/screens/home/navigate_bar_screens/home.dart';
