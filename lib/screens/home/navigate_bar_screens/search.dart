@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/home/widget/property_card.dart';
+import 'package:flutter_app/widgets/property_card.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});

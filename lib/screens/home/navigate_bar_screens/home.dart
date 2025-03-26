@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/auth/controller/auth_controller.dart';
-import 'package:flutter_app/screens/home/widget/property_card.dart';
-import 'package:flutter_app/screens/home/widget/rental_property_card.dart';
+import 'package:flutter_app/widgets/property_card.dart';
+import 'package:flutter_app/widgets/rental_property_card.dart';
 
 import 'package:get/get.dart';
 
