@@ -65,7 +65,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-
 // import 'package:flutter/material.dart';
 // import 'package:flutter_app/screens/auth/controller/auth_controller.dart';
 // import 'package:get/get.dart';

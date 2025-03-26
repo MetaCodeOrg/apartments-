@@ -129,7 +129,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.offNamed('/search');
+                },
                 child: const Text("اكتشف الكل"),
               ),
             ],
