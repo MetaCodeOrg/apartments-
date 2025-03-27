@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/core/constants/app_routes.dart';
 import 'package:flutter_app/core/pereferences/shared_pref.dart';
-import 'package:flutter_app/features/auth/controller/auth_controller.dart';
 import 'package:get/get.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -52,7 +51,7 @@ class SettingsPage extends StatelessWidget {
             _buildSettingsItem(
               icon: Icons.info_outline,
               title: 'about_app'.tr,
-              trailing: 'app_version'.tr + ' 1.0.0',
+              trailing: '${'app_version'.tr} 1.0.0',
               onTap: () {},
             ),
           ]),
