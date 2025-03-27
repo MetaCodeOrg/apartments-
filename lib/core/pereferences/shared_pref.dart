@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
@@ -61,5 +63,9 @@ class SharedPrefs {
 
   static Future<void> setInt(String key, int value) async {
     await _prefs.setInt(key, value);
+  }
+
+  static Future<void> clearAll() async {
+    await _prefs.clear();
   }
 }
