@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/core/constants/app_routes.dart';
+import 'package:flutter_app/core/pereferences/shared_pref.dart';
 import 'package:flutter_app/features/auth/controller/auth_controller.dart';
 import 'package:get/get.dart';
 
@@ -55,13 +57,14 @@ class SettingsPage extends StatelessWidget {
             ),
           ]),
           const SizedBox(height: 20),
-          GetBuilder<AuthController>(
-            builder: (controller) => _buildSettingsItem(
-              icon: Icons.logout,
-              title: 'logout'.tr,
-              color: Colors.red,
-              onTap: controller.logout,
-            ),
+          _buildSettingsItem(
+            icon: Icons.logout,
+            title: 'logout'.tr,
+            color: Colors.red,
+            onTap: () {
+              SharedPrefs.setBoolean(SharedPrefs.isLogin, false);
+              Get.offAllNamed(AppRoutes.home);
+            },
           ),
         ],
       ),

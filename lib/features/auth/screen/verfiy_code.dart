@@ -7,8 +7,7 @@ import '../widgets/auth_widgets.dart';
 
 class VerifyCodePage extends StatelessWidget {
   VerifyCodePage({super.key});
-  final AuthController controller = Get.put(AuthController());
-  final formkey = GlobalKey<FormState>();
+  final AuthController controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,7 @@ class VerifyCodePage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               child: Form(
-                key: formkey,
+                key: controller.formkeyverify,
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: Column(
@@ -91,7 +90,7 @@ class VerifyCodePage extends StatelessWidget {
                             text: 'verify.send'.tr,
                             isLoading: controller.isLoading.value,
                             onPressed: () async {
-                              if (formkey.currentState?.validate() ?? false) {
+                              if (controller.formkeyverify.currentState?.validate() ?? false) {
                                 await controller.loginFunc();
                                 Get.toNamed('/new_pass');
                               } else {

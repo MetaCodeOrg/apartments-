@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 class NewPass extends StatelessWidget {
   NewPass({super.key});
   final AuthController controller = Get.find<AuthController>();
-  final formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +28,7 @@ class NewPass extends StatelessWidget {
                     top: 10,
                     left: 10,
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_back,
-                          color: Colors.black, size: 25),
+                      icon: const Icon(Icons.arrow_back, color: Colors.black, size: 25),
                       onPressed: () {
                         Get.back();
                       },
@@ -77,7 +75,7 @@ class NewPass extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               child: Form(
-                key: formkey,
+                key: controller.formkeynewpass,
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: Column(
@@ -117,7 +115,7 @@ class NewPass extends StatelessWidget {
                             text: 'new_pass.save'.tr,
                             isLoading: controller.isLoading.value,
                             onPressed: () async {
-                              if (formkey.currentState!.validate()) {
+                              if (controller.formkeynewpass.currentState!.validate()) {
                                 await controller.loginFunc();
                                 Get.toNamed(AppRoutes.login);
                               }

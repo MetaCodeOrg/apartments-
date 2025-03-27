@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app/core/constants/app_routes.dart';
 import 'package:flutter_app/core/constants/assets/images.dart';
 import 'package:flutter_app/core/constants/widgets/property_card.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildHeader(),
+          _buildHeader(context),
           _buildSearchBar(),
           _buildFeaturedProperties(),
           const SizedBox(height: 10),
@@ -24,7 +25,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -32,12 +33,13 @@ class HomePage extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: Colors.grey[200],
-            child: Icon(Icons.person_outline, color: Colors.grey[800]),
+            child: IconButton(
+                onPressed: () {}, icon: Icon(Icons.person_outline, color: Colors.grey[800])),
           ),
           CircleAvatar(
             backgroundColor: Colors.grey[200],
             child: IconButton(
-              onPressed: () => {Get.toNamed('/setting')},
+              onPressed: () => {Get.toNamed(AppRoutes.settings)},
               icon: Icon(Icons.settings_outlined, color: Colors.grey[800]),
             ),
           ),
@@ -64,13 +66,13 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Icon(Icons.search, color: Colors.grey),
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text("search_placeholder".tr),
                       ),
                     ),
@@ -150,8 +152,7 @@ class HomePage extends StatelessWidget {
               bottom: 20,
             ),
             itemCount: properties.length,
-            separatorBuilder: (context, index) =>
-                const SizedBox(width: 5), // مسافة ثابتة
+            separatorBuilder: (context, index) => const SizedBox(width: 5), // مسافة ثابتة
             itemBuilder: (context, index) => properties[index],
           ),
         ),

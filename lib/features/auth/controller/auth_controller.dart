@@ -9,6 +9,12 @@ class AuthController extends GetxController {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController phoneNum = TextEditingController();
+  final formkeylogin = GlobalKey<FormState>();
+  final formkeysignup = GlobalKey<FormState>();
+  final formkeyforget = GlobalKey<FormState>();
+  final formkeynewpass = GlobalKey<FormState>();
+  final formkeyverify = GlobalKey<FormState>();
+
   var showPassIcon = false.obs;
   var isLoading = false.obs;
 
@@ -28,15 +34,15 @@ class AuthController extends GetxController {
     phoneNum.text = SharedPrefs.getString(SharedPrefs.phoneNumber);
   }
 
-  Future<void> signUpFunc() async {
+  void signUpFunc() {
     try {
       isLoading.value = true;
 
-      await SharedPrefs.setBoolean(SharedPrefs.isLogin, true);
-      await SharedPrefs.setString(SharedPrefs.username, username.text);
-      await SharedPrefs.setString(SharedPrefs.email, email.text);
-      await SharedPrefs.setString(SharedPrefs.password, password.text);
-      await SharedPrefs.setString(SharedPrefs.phoneNumber, phoneNum.text);
+      SharedPrefs.setBoolean(SharedPrefs.isLogin, true);
+      SharedPrefs.setString(SharedPrefs.username, username.text);
+      SharedPrefs.setString(SharedPrefs.email, email.text);
+      SharedPrefs.setString(SharedPrefs.password, password.text);
+      SharedPrefs.setString(SharedPrefs.phoneNumber, phoneNum.text);
 
       Get.offAllNamed('/home');
     } catch (e) {
@@ -58,14 +64,12 @@ class AuthController extends GetxController {
 
       // التحقق من بيانات الدخول مقابل البيانات المحفوظة
       if ((email.text == savedEmail ||
-              (username.text == savedUsername &&
-                  phoneNum.text == savedPhone)) &&
+              (username.text == savedUsername && phoneNum.text == savedPhone)) &&
           password.text == savedPassword) {
         await SharedPrefs.setBoolean(SharedPrefs.isLogin, true);
         Get.offAllNamed(AppRoutes.home);
       } else {
-        showSnakBar(
-            title: "Error", msg: "بيانات الدخول غير صحيحة", color: Colors.red);
+        showSnakBar(title: "Error", msg: "بيانات الدخول غير صحيحة", color: Colors.red);
       }
     } catch (e) {
       showSnakBar(title: "Error", msg: e.toString(), color: Colors.red);
@@ -73,32 +77,8 @@ class AuthController extends GetxController {
       isLoading.value = false;
     }
   }
-  // Future<void> loginFunc() async {
-  //   try {
-  //     isLoading.value = true;
-
-  //     // التحقق من بيانات المستخدم (يمكن استبداله بمصادقة Firebase لاحقًا)
-  //     if (email.text == "test@example.com" && password.text == "password") {
-  //       await SharedPrefs.setBoolean(SharedPrefs.isLogin, true); // تخزين تسجيل الدخول
-  //       Get.offAllNamed(
-  //           '/home'); // الانتقال إلى الصفحة الرئيسية وإزالة جميع الصفحات السابقة من الذاكرة
-  //     } else {
-  //       Get.snackbar("Error", "Invalid email or password");
-  //     }
-  //   } catch (e) {
-  //     Get.snackbar(
-  //       'Error',
-  //       e.toString(),
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       duration: const Duration(seconds: 3),
-  //     );
-  //   } finally {
-  //     isLoading.value = false;
-  //   }
-  // }
 
   void logout() async {
-    // لا تمسح جميع البيانات، فقط حالة تسجيل الدخول
     await SharedPrefs.setBoolean(SharedPrefs.isLogin, false);
     clearTextField();
     Get.offAllNamed(AppRoutes.home);

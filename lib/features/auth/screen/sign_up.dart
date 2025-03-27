@@ -9,7 +9,6 @@ import '../widgets/auth_widgets.dart';
 class SignUp extends StatelessWidget {
   SignUp({super.key});
   final AuthController controller = Get.find<AuthController>();
-  final formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,7 @@ class SignUp extends StatelessWidget {
               color: Colors.white,
               padding: const EdgeInsets.all(20),
               child: Form(
-                key: formkey,
+                key: controller.formkeysignup,
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: ListView(
@@ -78,8 +77,7 @@ class SignUp extends StatelessWidget {
                             labelText: 'signup.email'.tr,
                             suffixIcon: const Icon(Icons.email),
                             keyboardType: TextInputType.emailAddress,
-                            validator: (p0) =>
-                                validInput(p0 ?? "", 3, 30, "email"),
+                            validator: (p0) => validInput(p0 ?? "", 3, 30, "email"),
                           ),
                           const SizedBox(height: 15),
                           Obx(() {
@@ -89,13 +87,12 @@ class SignUp extends StatelessWidget {
                               labelText: 'signup.password'.tr,
                               textAlign: TextAlign.right,
                               obscureText: !controller.showPassIcon.value,
-                              validator: (p0) =>
-                                  validInput(p0 ?? "", 6, 30, "password"),
+                              validator: (p0) => validInput(p0 ?? "", 6, 30, "password"),
                               suffixIcon: Icon(
-                                  controller.showPassIcon.value
-                                      ? Icons.visibility_outlined
-                                      : Icons.visibility_off_outlined,
-                                ),
+                                controller.showPassIcon.value
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                              ),
                               onSuffixIconPressed: controller.togglePasswordVisibility,
                             );
                           }),
@@ -125,11 +122,10 @@ class SignUp extends StatelessWidget {
                                 height: 50,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 92, 157, 175),
+                                    backgroundColor: const Color.fromARGB(255, 92, 157, 175),
                                   ),
                                   onPressed: () async {
-                                    if (formkey.currentState!.validate()) {
+                                    if (controller.formkeysignup.currentState!.validate()) {
                                       controller.signUpFunc();
                                     }
                                   },
@@ -149,9 +145,7 @@ class SignUp extends StatelessWidget {
                           text: TextSpan(
                             text: "signup.have_account".tr,
                             style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
+                                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
                             children: [
                               TextSpan(
                                   text: "signup.login".tr,

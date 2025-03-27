@@ -60,7 +60,7 @@ class AccountType extends StatelessWidget {
       {required String imagePath, required String title}) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(AppRoutes.register);
+        Get.offNamed(AppRoutes.register);
       },
       child: Container(
         width: 200,

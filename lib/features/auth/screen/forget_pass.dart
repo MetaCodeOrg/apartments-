@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 class ForgetPass extends StatelessWidget {
   ForgetPass({super.key});
   final AuthController controller = Get.find<AuthController>();
-  final formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,7 @@ class ForgetPass extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               child: Form(
-                key: formkey,
+                key: controller.formkeyforget,
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: Column(
@@ -83,7 +82,7 @@ class ForgetPass extends StatelessWidget {
                             text: 'forget_password.send_code'.tr,
                             isLoading: controller.isLoading.value,
                             onPressed: () async {
-                              if (formkey.currentState!.validate()) {
+                              if (controller.formkeyforget.currentState!.validate()) {
                                 await controller.loginFunc();
                                 Get.toNamed(AppRoutes.verifyCode);
                               } else {

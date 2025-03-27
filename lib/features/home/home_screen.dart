@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends GetView<HomeController> {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,8 @@ class HomeScreen extends GetView<HomeController> {
                   }
                   return AnimatedContainer(
                     duration: const Duration(milliseconds: 350),
-                    color: connect.checkIsConnect
-                        ? const Color(0xFF00EE44)
-                        : const Color(0xFFEE4400),
+                    color:
+                        connect.checkIsConnect ? const Color(0xFF00EE44) : const Color(0xFFEE4400),
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 350),
                       child: connect.checkIsConnect
@@ -39,8 +38,7 @@ class HomeScreen extends GetView<HomeController> {
                                   height: 12.0,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2.0,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white),
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   ),
                                 ),
                               ],

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/core/class/navigtor_model.dart';
 import 'package:flutter_app/features/about/about.dart';
@@ -7,10 +6,8 @@ import 'package:flutter_app/features/search/search.dart';
 import 'package:flutter_app/features/setting/setting.dart';
 import 'package:get/get.dart';
 
-
 class HomeController extends GetxController {
   var pageIndex = 0.obs;
-
 
   List<NavigatorModel> items = [
     NavigatorModel(
@@ -22,12 +19,12 @@ class HomeController extends GetxController {
       icon: Icons.search,
     ),
     NavigatorModel(
-      title: 'setting',
-      icon: Icons.settings_outlined,
-    ),
-     NavigatorModel(
       title: 'about',
       icon: Icons.info_outline,
+    ),
+    NavigatorModel(
+      title: 'setting',
+      icon: Icons.settings_outlined,
     ),
   ];
   List<Widget> screens = [
@@ -45,7 +42,6 @@ class HomeController extends GetxController {
     pageIndex.value = index;
     // update();
   }
-
 
   @override
   void onInit() {

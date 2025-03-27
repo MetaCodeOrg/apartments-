@@ -31,27 +31,21 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: (context, child) =>
-            GetBuilder<ThemeController>(builder: (themeController) {
-              return GetBuilder<LocalizationController>(
-                  builder: (localizeController) {
+        builder: (context, child) => GetBuilder<ThemeController>(builder: (themeController) {
+              return GetBuilder<LocalizationController>(builder: (localizeController) {
                 return GetMaterialApp(
                   builder: EasyLoading.init(),
                   title: AppConstants.appName,
                   debugShowCheckedModeBanner: false,
                   navigatorKey: Get.key,
                   scrollBehavior: const MaterialScrollBehavior().copyWith(
-                    dragDevices: {
-                      PointerDeviceKind.mouse,
-                      PointerDeviceKind.touch
-                    },
+                    dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch},
                   ),
                   themeMode: ThemeMode.system,
                   theme: themeController.darkTheme ? dark : light,
                   locale: localizeController.locale,
                   translations: Messages(languages: languages),
-                  fallbackLocale: Locale(
-                      AppConstants.languages[0].languageCode!,
+                  fallbackLocale: Locale(AppConstants.languages[0].languageCode!,
                       AppConstants.languages[0].countryCode),
                   defaultTransition: Transition.topLevel,
                   initialRoute: '/',
