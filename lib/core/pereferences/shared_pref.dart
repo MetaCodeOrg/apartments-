@@ -11,7 +11,8 @@ class SharedPrefs {
   static const token = "token";
   static const localLange = "localLange";
   static const themeApp = "themeApp";
-
+  static const username = "username";
+  static const phoneNumber = "phoneNumber";
 
   static initPref() async {
     _prefs = await SharedPreferences.getInstance();
@@ -26,9 +27,7 @@ class SharedPrefs {
     await _prefs.setBool(key, value);
   }
 
-  static const username = "username";
-  static const phoneNumber = "phoneNumber";
-
+  /// Get and Set UserName
   static String getUsername() {
     return _prefs.getString(username) ?? "";
   }
@@ -37,6 +36,7 @@ class SharedPrefs {
     await _prefs.setString(username, value);
   }
 
+  /// Get and Set Phone_Number
   static String getPhoneNumber() {
     return _prefs.getString(phoneNumber) ?? "";
   }
