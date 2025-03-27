@@ -1,65 +1,63 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/auth/pages/account_type.dart';
-import 'package:flutter_app/screens/home/main_screen.dart';
-import 'package:flutter_app/screens/home/navigate_bar_screens/about.dart';
-import 'package:flutter_app/screens/home/navigate_bar_screens/home.dart';
-import 'package:flutter_app/screens/home/navigate_bar_screens/search.dart';
-import 'package:flutter_app/screens/home/navigate_bar_screens/setting.dart';
-
+import 'package:flutter_app/core/constants/app_constants.dart';
+import 'package:flutter_app/core/constants/app_routes.dart';
+import 'package:flutter_app/core/theme/controller/theme_controller.dart';
+import 'package:flutter_app/core/theme/dark_theme.dart';
+import 'package:flutter_app/core/theme/light_theme.dart';
+import 'package:flutter_app/features/language/controller/localization_controller.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_app/bindings/initial_buindings.dart';
-import 'package:flutter_app/middleware/middle_ware.dart';
-import 'package:flutter_app/screens/auth/pages/forget_pass.dart';
-import 'package:flutter_app/screens/auth/pages/login.dart';
-import 'package:flutter_app/screens/auth/pages/new_pass.dart';
-import 'package:flutter_app/screens/auth/pages/sign_up.dart';
-import 'package:flutter_app/screens/auth/pages/verfiy_code.dart';
-import 'package:flutter_app/shared_pereferences/shared_pref.dart';
 import 'package:get/get.dart';
+import 'core/class/translate.dart';
+import 'core/helper/get_di.dart' as di;
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await SharedPrefs.initPref();
+  Map<String, Map<String, String>> languages = await di.init();
 
-  bool isUserLoggedIn = SharedPrefs.getBoolean(SharedPrefs.isLogin);
-  print('User logged in: $isUserLoggedIn');
-
-  runApp(MyApp(isUserLoggedIn: isUserLoggedIn));
+  runApp(MyApp(
+    languages: languages,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  final bool isUserLoggedIn;
-  const MyApp({super.key, required this.isUserLoggedIn});
+  final Map<String, Map<String, String>>? languages;
+  const MyApp({super.key, this.languages});
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialBinding: InitialBinding(),
-          initialRoute: isUserLoggedIn ? '/home' : '/login',
-          //  initialRoute: 'home',
-          // home: AccountType(),
-          getPages: [
-            GetPage(name: '/login', page: () => Login()),
-            GetPage(name: '/register', page: () => SignUp()),
-            GetPage(name: '/forget', page: () => ForgetPass()),
-            GetPage(name: '/verify', page: () => VerifyCodePage()),
-            GetPage(name: '/new_pass', page: () => NewPass()),
-            GetPage(name: '/home', page: () => const MainScreen(), middlewares: [AuthMiddleware()]),
-            GetPage(name: '/setting', page: () => const SettingsPage()),
-            GetPage(name: '/search', page: () => const SearchPage()),
-            GetPage(name: '/about', page: () => const AboutPage()),
-            GetPage(name: '/homepage', page: () => const HomePage()),
-            GetPage(name: '/account_type', page: () => const AccountType()),
-          ],
-        );
-      },
-    );
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) =>
+            GetBuilder<ThemeController>(builder: (themeController) {
+              return GetBuilder<LocalizationController>(
+                  builder: (localizeController) {
+                return GetMaterialApp(
+                  builder: EasyLoading.init(),
+                  title: AppConstants.appName,
+                  debugShowCheckedModeBanner: false,
+                  navigatorKey: Get.key,
+                  scrollBehavior: const MaterialScrollBehavior().copyWith(
+                    dragDevices: {
+                      PointerDeviceKind.mouse,
+                      PointerDeviceKind.touch
+                    },
+                  ),
+                  themeMode: ThemeMode.system,
+                  theme: themeController.darkTheme ? dark : light,
+                  locale: localizeController.locale,
+                  translations: Messages(languages: languages),
+                  fallbackLocale: Locale(
+                      AppConstants.languages[0].languageCode!,
+                      AppConstants.languages[0].countryCode),
+                  defaultTransition: Transition.topLevel,
+                  initialRoute: '/',
+                  getPages: AppRoutes.getPages,
+                );
+              });
+            }));
   }
 }

@@ -1,0 +1,1 @@
+enum ApplePayStatus { success, fail, unknown }
