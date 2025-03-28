@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/core/constants/widgets/property_card.dart';
-import 'package:get/get.dart';
 import 'package:flutter_app/core/constants/assets/images.dart';
+import 'package:get/get.dart';
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+import '../../core/constants/widgets/rental_property_card.dart';
+
+class ApartmentsForRent extends StatelessWidget {
+  const ApartmentsForRent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final rentalProperties = [
+      RentalPropertyCard(
+        image: AppImages.home1,
+        title: "khaled_building".tr,
+        location: "khaled_building_location".tr,
+        rating: 4,
+      ),
+      RentalPropertyCard(
+        image: AppImages.home2,
+        title: "unity_building".tr,
+        location: "unity_building_location".tr,
+        rating: 3,
+      ),
+      RentalPropertyCard(
+        image: AppImages.home3,
+        title: "qabati_building".tr,
+        location: "qabati_building_location".tr,
+        rating: 3,
+      ),
+    ];
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('search_property'.tr),
+        title: Text('Apartments for rent'.tr),
         centerTitle: true,
         backgroundColor: Colors.white,
         actions: [
@@ -51,27 +71,12 @@ class SearchPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
 
-            GridView.count(
+            ListView.separated(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              childAspectRatio: 0.8,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              children: List.generate(6, (index) {
-                return PropertyCard(
-                  image: index % 4 == 0
-                      ? AppImages.home1
-                      : index % 4 == 1
-                          ? AppImages.home2
-                          : index % 4 == 2
-                              ? AppImages.home3
-                              : AppImages.home4,
-                  title: "featured_property".tr,
-                  location: "featured_location".tr,
-                  rating: 4,
-                );
-              }),
+              physics: const ClampingScrollPhysics(),
+              itemCount: rentalProperties.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+              itemBuilder: (context, index) => rentalProperties[index],
             ),
           ],
         ),

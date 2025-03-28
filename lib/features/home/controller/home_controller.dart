@@ -29,7 +29,7 @@ class HomeController extends GetxController {
   ];
   List<Widget> screens = [
     const HomePage(),
-    const SearchPage(),
+    SearchPage(),
     const AboutPage(),
     const SettingsPage(),
   ];

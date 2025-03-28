@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/core/constants/app_routes.dart';
-import 'package:flutter_app/features/auth/controller/auth_controller.dart';
+import 'package:flutter_app/core/class/statusrequest.dart';
 import 'package:flutter_app/core/constants/widgets/custom_text_field.dart';
+import 'package:flutter_app/features/auth/controller/forget_password_controller.dart';
 import 'package:flutter_app/features/auth/widgets/auth_widgets.dart';
 import 'package:get/get.dart';
 
-class ForgetPass extends StatelessWidget {
-  ForgetPass({super.key});
-  final AuthController controller = Get.find<AuthController>();
+class ForgetPass extends GetView<ForgetPasswordController> {
+  const ForgetPass({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class ForgetPass extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: Text(
                       'forget_password.subtitle'.tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -51,47 +50,36 @@ class ForgetPass extends StatelessWidget {
                 ],
               ),
             ),
-
-            /// حقل إدخال رقم الجوال
             Container(
               padding: const EdgeInsets.all(20),
               child: Form(
-                key: controller.formkeyforget,
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 15),
-                      CustomTextField(
-                        controller: controller.phoneNum,
-                        hintText: 'enter_phone'.tr,
-                        labelText: 'phone'.tr,
-                        suffixIcon: const Icon(Icons.phone),
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'empty'.tr;
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 100),
+                key: controller.formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 15),
+                    CustomTextField(
+                      controller: controller.phone,
+                      hintText: 'enter_phone'.tr,
+                      labelText: 'phone'.tr,
+                      suffixIcon: const Icon(Icons.phone),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'empty'.tr;
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 100),
 
-                      /// زر إرسال كود التحقق
-                      Obx(() => AuthButton(
+                    /// زر إرسال كود التحقق
+                    GetBuilder<ForgetPasswordController>(
+                        builder: (controller) => AuthButton(
                             text: 'forget_password.send_code'.tr,
-                            isLoading: controller.isLoading.value,
-                            onPressed: () async {
-                              if (controller.formkeyforget.currentState!.validate()) {
-                                await controller.loginFunc();
-                                Get.toNamed(AppRoutes.verifyCode);
-                              } else {
-                                Get.toNamed(AppRoutes.verifyCode);
-                              }
-                            },
-                          ))
-                    ],
-                  ),
+                            isLoading: controller.statusRequest ==
+                                StatusRequest.loading,
+                            onPressed: controller.submit))
+                  ],
                 ),
               ),
             ),

@@ -22,8 +22,9 @@ class HomeScreen extends GetView<HomeController> {
                   }
                   return AnimatedContainer(
                     duration: const Duration(milliseconds: 350),
-                    color:
-                        connect.checkIsConnect ? const Color(0xFF00EE44) : const Color(0xFFEE4400),
+                    color: connect.checkIsConnect
+                        ? const Color(0xFF00EE44)
+                        : const Color(0xFFEE4400),
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 350),
                       child: connect.checkIsConnect
@@ -38,7 +39,8 @@ class HomeScreen extends GetView<HomeController> {
                                   height: 12.0,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2.0,
-                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white),
                                   ),
                                 ),
                               ],
@@ -65,6 +67,7 @@ class HomeScreen extends GetView<HomeController> {
           onTap: controller.jumpToPage,
           selectedIconTheme: IconThemeData(size: 30.sp, color: Colors.blue),
           unselectedIconTheme: IconThemeData(size: 26.sp, color: Colors.grey),
+          unselectedItemColor: Colors.grey,
           items: controller.items.map((item) {
             return BottomNavigationBarItem(
               icon: Icon(

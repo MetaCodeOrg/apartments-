@@ -1,51 +1,26 @@
 {
   "project_info": {
-    "project_number": "140234204311",
-    "project_id": "fir-auth-ad8a6",
-    "storage_bucket": "fir-auth-ad8a6.firebasestorage.app"
+    "project_number": "710425691415",
+    "project_id": "mc-apartments",
+    "storage_bucket": "mc-apartments.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:140234204311:android:556e990286b844bebdb5d2",
+        "mobilesdk_app_id": "1:710425691415:android:cc1be0bce03dceb0172352",
         "android_client_info": {
           "package_name": "com.example.flutter_app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "140234204311-4pbd98o5ie5qqtc1ljkbfijghhp59vku.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.flutter_app",
-            "certificate_hash": "1dfa6f8c24bdafe8ef6f1fe7e8cf2aeac9640f27"
-          }
-        },
-        {
-          "client_id": "140234204311-3jtoll8vfpv24sa379imumqmskam68hk.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD17eStdTvy-lND7aFMY8ijmRt6lIm74fI"
+          "current_key": "AIzaSyAp_v7VYMGPOE87c08mCwkRDTVd0E5S05E"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "140234204311-3jtoll8vfpv24sa379imumqmskam68hk.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "140234204311-836tnk1q7d1nu9joapq00ft58u65ioh2.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.flutterApp"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

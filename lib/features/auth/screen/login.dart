@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/core/constants/app_routes.dart';
-import 'package:flutter_app/features/auth/controller/auth_controller.dart';
 import 'package:flutter_app/core/functions/validation.dart';
 import 'package:flutter_app/core/constants/widgets/custom_text_field.dart';
 import 'package:flutter_app/features/auth/widgets/auth_widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../controller/login_controller.dart';
 
-class Login extends StatelessWidget {
+class Login extends GetView<LoginController> {
   Login({super.key});
-  final AuthController controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,60 +40,60 @@ class Login extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(20.w),
               child: Form(
-                key: controller.formkeylogin,
+                key: controller.formKeyLogin,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     CustomTextField(
-                      controller: controller.username,
+                      controller: controller.name,
                       hintText: 'enter_name'.tr,
                       labelText: 'name'.tr,
-                      suffixIcon: const Icon(Icons.edit_document),
+                      suffixIcon: const Icon(Icons.person),
                       keyboardType: TextInputType.name,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجى إدخال الاسم';
+                          return 'Please enter your name';
                         }
                         return null;
                       },
-                      textAlign: TextAlign.right,
                     ),
                     SizedBox(height: 15.h),
                     CustomTextField(
-                      controller: controller.phoneNum,
+                      controller: controller.phone,
                       hintText: 'enter_phone'.tr,
                       labelText: 'phone'.tr,
                       suffixIcon: const Icon(Icons.phone),
                       keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجى إدخال رقم الجوال';
+                          return 'Please enter your Phone';
                         }
                         return null;
                       },
                     ),
                     SizedBox(height: 15.h),
-                    Obx(() {
+                    GetBuilder<LoginController>(builder: (controller) {
                       return CustomAuthTextField(
                         controller: controller.password,
                         hintText: 'password'.tr,
                         labelText: 'password'.tr,
-                        textAlign: TextAlign.right,
-                        obscureText: controller.showPassIcon.value,
-                        validator: (p0) => validInput(p0 ?? "", 6, 30, "password"),
+                        textAlign: TextAlign.left,
+                        obscureText: controller.showPassword,
+                        validator: (p0) =>
+                            validInput(p0 ?? "", 6, 30, "password"),
                         suffixIcon: Icon(
-                          controller.showPassIcon.value
+                          controller.showPassword
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
                         ),
-                        onSuffixIconPressed: controller.togglePasswordVisibility,
+                        onSuffixIconPressed: controller.showHidePassword,
                       );
                     }),
                     SizedBox(height: 10.h),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: InkWell(
-                        onTap: () => Get.toNamed('/forget'),
+                        onTap: () => Get.toNamed(AppRoutes.forgetPassword),
                         child: Text(
                           'forgot_password'.tr,
                           style: TextStyle(
@@ -105,32 +104,25 @@ class Login extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 20.h),
-                    Obx(() {
-                      return controller.isLoading.value
-                          ? const Center(child: CircularProgressIndicator())
-                          : SizedBox(
-                              width: double.infinity,
-                              height: 50.h,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color.fromARGB(255, 92, 157, 175),
-                                ),
-                                onPressed: () {
-                                  if (controller.formkeylogin.currentState!.validate()) {
-                                    controller.loginFunc();
-                                  }
-                                },
-                                child: Text(
-                                  'enter'.tr,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            );
-                    }),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50.h,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 92, 157, 175),
+                        ),
+                        onPressed: controller.login,
+                        child: Text(
+                          'enter'.tr,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                     SizedBox(height: 25.h),
                     Center(
                       child: InkWell(

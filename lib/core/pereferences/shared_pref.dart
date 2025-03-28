@@ -1,26 +1,26 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+import 'dart:convert';
 
+import 'package:flutter_app/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
   static late SharedPreferences _prefs;
-
+  static const user = "user";
   static const isLogin = "isLogin";
   static const showSplash = "showSplash";
-  static const userId = "userID";
-  static const email = "email";
-  static const password = "password";
-  static const token = "token";
+  // static const userId = "userID";
+  // static const email = "email";
+  // static const password = "password";
+  // static const token = "token";
   static const localLange = "localLange";
   static const themeApp = "themeApp";
-  static const username = "username";
-  static const phoneNumber = "phoneNumber";
+  // static const username = "username";
+  // static const phoneNumber = "phoneNumber";
 
   static initPref() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  /// Get and Set Boolean
   static bool getBoolean(String key) {
     return _prefs.getBool(key) ?? false;
   }
@@ -29,25 +29,6 @@ class SharedPrefs {
     await _prefs.setBool(key, value);
   }
 
-  /// Get and Set UserName
-  static String getUsername() {
-    return _prefs.getString(username) ?? "";
-  }
-
-  static Future<void> setUsername(String value) async {
-    await _prefs.setString(username, value);
-  }
-
-  /// Get and Set Phone_Number
-  static String getPhoneNumber() {
-    return _prefs.getString(phoneNumber) ?? "";
-  }
-
-  static Future<void> setPhoneNumber(String value) async {
-    await _prefs.setString(phoneNumber, value);
-  }
-
-  /// Get and Set String
   static String getString(String key) {
     return _prefs.getString(key) ?? "";
   }
@@ -56,7 +37,14 @@ class SharedPrefs {
     await _prefs.setString(key, value);
   }
 
-  /// Get and Set INT
+  static Future<void> setListString(String key, List<String>? value) async {
+    await _prefs.setStringList(key, value ?? []);
+  }
+
+  static List<String> getListString(String key) {
+    return _prefs.getStringList(key) ?? [];
+  }
+
   static int getInt(String key) {
     return _prefs.getInt(key) ?? 0;
   }
@@ -65,7 +53,33 @@ class SharedPrefs {
     await _prefs.setInt(key, value);
   }
 
-  static Future<void> clearAll() async {
+  static Future<void> clearSharPreference() async {
+    var locale = getString(localLange);
+
     await _prefs.clear();
+    setBoolean(showSplash, true);
+    setString(localLange, locale);
+  }
+
+  static Future<void> clearKeyData(String key) async {
+    await _prefs.remove(key);
+  }
+
+  static Future<void> setDataUser(UserModel userModel) async {
+    // log("${userModel.toJson()}8888888888888888888888");
+    var userEncode = jsonEncode(userModel.toJson());
+    await _prefs.setString(user, userEncode);
+  }
+
+  static UserModel? getDataUser() {
+    var data = _prefs.getString(user);
+    if (data != null && data.isNotEmpty) {
+      var userDecode = jsonDecode(data);
+      UserModel userModel = UserModel.fromJson(userDecode);
+
+      return userModel;
+    } else {
+      return null;
+    }
   }
 }

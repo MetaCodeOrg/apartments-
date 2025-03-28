@@ -97,7 +97,6 @@ class AuthLogo extends StatelessWidget {
   }
 }
 
-
 class AuthButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;

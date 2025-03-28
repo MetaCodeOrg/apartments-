@@ -90,6 +90,24 @@
   "residential_city_location": "Hadda / Residential City",
   "khaled_building_location": "Hadda / Residential City",
   "unity_building_location": "Hadda / Residential City",
-  "qabati_building_location": "Hadda / Residential City"
+  "qabati_building_location": "Hadda / Residential City",
+  "enter_password": "Enter Password",
+  "password_does_not_matched": "Password Does Not Match",
+  "otp_verification": "Phone Verification",
+  "enter_the_verification_sent_to": "Enter the Verification Code Sent to",
+  "verify": "Verify",
+  "did_not_receive_the_code": "Did Not Receive the Code ? Click Resend",
+  "resent": "Resend",
+  "resend_code_successful": "Code Resent Successfully",
+  "send_verification_code": "We will send you an email verify code to reset your password",
+  "otp_time": "OTP will expire after 5 minutes",
+  "confirm": "Confirm",
+  "resend_code": "Resend Code after",
+  "alert": "Alert!",
+  "resend_alert": "Do you want to resend the verification code?",
+  "logout_msg": "Are you sure you want to logout ?",
+  "change_pass": "Change Password",
+  "new_pass": "New Password",
+  "update": "Update",
+  "current_pass": "Current Password"
 }
-  

@@ -9,6 +9,7 @@ import 'package:flutter_app/features/auth/screen/verfiy_code.dart';
 import 'package:flutter_app/features/home/home_screen.dart';
 import 'package:flutter_app/features/about/about.dart';
 import 'package:flutter_app/features/home/screen/home_page.dart';
+import 'package:flutter_app/features/search/apartments_for_rent.dart';
 import 'package:flutter_app/features/search/search.dart';
 import 'package:flutter_app/features/setting/setting.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,7 @@ class AppRoutes {
   static const String homePage = '/homepage';
   static const String accountType = '/account_type';
   static const String langugue = "/lang";
+  static const String apartmentsFoRent = "/apartments_for_rent";
 
   static List<GetPage<dynamic>> getPages = [
     GetPage(
@@ -41,10 +43,11 @@ class AppRoutes {
     GetPage(name: verifyCode, page: () => VerifyCodePage()),
     GetPage(name: newPassword, page: () => NewPass()),
     GetPage(name: settings, page: () => const SettingsPage()),
-    GetPage(name: search, page: () => const SearchPage()),
+    GetPage(name: search, page: () => SearchPage()),
     GetPage(name: about, page: () => const AboutPage()),
     GetPage(name: homePage, page: () => const HomePage()),
     GetPage(name: accountType, page: () => const AccountType()),
     GetPage(name: langugue, page: () => const HomeLanguage()),
+    GetPage(name: apartmentsFoRent, page: () => const ApartmentsForRent()),
   ];
 }

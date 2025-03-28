@@ -34,7 +34,8 @@ class HomePage extends StatelessWidget {
           CircleAvatar(
             backgroundColor: Colors.grey[200],
             child: IconButton(
-                onPressed: () {}, icon: Icon(Icons.person_outline, color: Colors.grey[800])),
+                onPressed: () {},
+                icon: Icon(Icons.person_outline, color: Colors.grey[800])),
           ),
           CircleAvatar(
             backgroundColor: Colors.grey[200],
@@ -134,7 +135,9 @@ class HomePage extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Get.toNamed(AppRoutes.search);
+                  Get.toNamed(
+                    AppRoutes.search,
+                  );
                 },
                 child: Text("discover_all".tr),
               ),
@@ -152,7 +155,8 @@ class HomePage extends StatelessWidget {
               bottom: 20,
             ),
             itemCount: properties.length,
-            separatorBuilder: (context, index) => const SizedBox(width: 5), // مسافة ثابتة
+            separatorBuilder: (context, index) =>
+                const SizedBox(width: 5), // مسافة ثابتة
             itemBuilder: (context, index) => properties[index],
           ),
         ),
@@ -198,7 +202,11 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(
+                    AppRoutes.apartmentsFoRent,
+                  );
+                },
                 child: Text("discover_all".tr),
               ),
             ],
