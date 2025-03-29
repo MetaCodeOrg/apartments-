@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PropertyDetailScreen extends StatelessWidget {
-  const PropertyDetailScreen({Key? key}) : super(key: key);
+  const PropertyDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class PropertyDetailScreen extends StatelessWidget {
                         // Main property image
                         Container(
                           height: 280,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(
                                   'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80'),
@@ -41,8 +41,7 @@ class PropertyDetailScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: IconButton(
-                                  icon: const Icon(Icons.arrow_back,
-                                      color: Colors.black),
+                                  icon: const Icon(Icons.arrow_back, color: Colors.black),
                                   onPressed: () {},
                                 ),
                               ),
@@ -52,8 +51,7 @@ class PropertyDetailScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: IconButton(
-                                  icon: const Icon(Icons.person_outline,
-                                      color: Colors.black),
+                                  icon: const Icon(Icons.person_outline, color: Colors.black),
                                   onPressed: () {},
                                 ),
                               ),
@@ -66,8 +64,7 @@ class PropertyDetailScreen extends StatelessWidget {
                           top: 16,
                           left: 16,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.8),
                               borderRadius: BorderRadius.circular(4),
@@ -78,8 +75,7 @@ class PropertyDetailScreen extends StatelessWidget {
                                 Icon(Icons.star, color: Colors.amber, size: 16),
                                 Icon(Icons.star, color: Colors.amber, size: 16),
                                 Icon(Icons.star, color: Colors.amber, size: 16),
-                                Icon(Icons.star_half,
-                                    color: Colors.amber, size: 16),
+                                Icon(Icons.star_half, color: Colors.amber, size: 16),
                               ],
                             ),
                           ),
@@ -93,8 +89,7 @@ class PropertyDetailScreen extends StatelessWidget {
                           child: Center(
                             child: Container(
                               height: 70,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 16),
+                              margin: const EdgeInsets.symmetric(horizontal: 16),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -173,8 +168,7 @@ class PropertyDetailScreen extends StatelessWidget {
                           const Row(
                             textDirection: TextDirection.rtl,
                             children: [
-                              Icon(Icons.location_on,
-                                  color: Colors.grey, size: 20),
+                              Icon(Icons.location_on, color: Colors.grey, size: 20),
                               SizedBox(width: 4),
                               Expanded(
                                 child: Text(
@@ -208,8 +202,7 @@ class PropertyDetailScreen extends StatelessWidget {
                               _ArabicFeatureItem(text: 'صالة معيشة واسعة*'),
                               _ArabicFeatureItem(text: 'غرفتين نوم رئيسة*'),
                               _ArabicFeatureItem(text: 'غرفة نوم اطفال*'),
-                              _ArabicFeatureItem(
-                                  text: 'مطبخ متكامل مجهز بكل التوابع*'),
+                              _ArabicFeatureItem(text: 'مطبخ متكامل مجهز بكل التوابع*'),
                               _ArabicFeatureItem(text: 'حمام عائلي*'),
                             ],
                           ),
